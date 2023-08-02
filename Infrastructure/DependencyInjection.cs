@@ -9,7 +9,7 @@ namespace Infrastructure;
 
 public static class DependencyInjection
 {
-    public static void AddInfrastructure(this IServiceCollection services, 
+    public static IServiceCollection AddInfrastructure(this IServiceCollection services, 
                                         IConfiguration config)
     {
         var connectionString = config.GetConnectionString("MainConnection");
@@ -21,7 +21,7 @@ public static class DependencyInjection
         services.AddJwt();
         services.Configure<JwtOptions>(jwtSection);
         services.ConfigureOptions<JwtOptionsSetup>();
-        
 
+        return services;
     }
 }

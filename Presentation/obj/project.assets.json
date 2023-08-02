@@ -3906,7 +3906,10 @@
         "type": "project",
         "framework": ".NETCoreApp,Version=v7.0",
         "dependencies": {
-          "Domain": "1.0.0"
+          "Domain": "1.0.0",
+          "Infrastructure": "1.0.0",
+          "Microsoft.Extensions.DependencyInjection.Abstractions": "7.0.0",
+          "OneOf": "3.0.255"
         },
         "compile": {
           "bin/placeholder/Application.dll": {}
@@ -3929,7 +3932,6 @@
         "type": "project",
         "framework": ".NETCoreApp,Version=v7.0",
         "dependencies": {
-          "Application": "1.0.0",
           "BCrypt.Net-Next": "4.0.3",
           "Domain": "1.0.0",
           "Microsoft.AspNetCore.Authentication.JwtBearer": "7.0.9",

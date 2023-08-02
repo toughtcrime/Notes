@@ -10,6 +10,6 @@ public partial class User : BaseEntity<long>
     public required string Firstname { get; set; }
     public required string Lastname { get; set; }
     public required DateTime BirthDay { get; set; }
-    public required DateTime RegistrationDate { get; set; }
+    public DateTime RegistrationDate { get; set; } = DateTime.UtcNow;
     public List<Note>? Notes = new();
 }

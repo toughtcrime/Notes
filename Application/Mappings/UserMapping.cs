@@ -11,18 +11,15 @@ namespace Application.Mappings
 {
     public class UserMapping
     {
-        public User RegisterMap(RegisterRequest request)
+        public User RegisterMap(RegisterRequest request) => new User
         {
-            return new User
-            {
-                Email = request.Email,
-                Firstname = request.Firstname,
-                Lastname = request.Lastname,
-                BirthDay = request.BirthDay,
-                HashedPassword = request.Password == request.RepeatPassword ? 
+            Email = request.Email,
+            Firstname = request.Firstname,
+            Lastname = request.Lastname,
+            BirthDay = request.BirthDay,
+            HashedPassword = request.Password == request.RepeatPassword ?
                                BCrypt.Net.BCrypt.HashPassword(request.Password) : throw new Exception("Password is not matching"),
-                Username = request.Username
-            };
-        }
+            Username = request.Username
+        };
     }
 }

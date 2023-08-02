@@ -1,3 +1,4 @@
+using Application;
 using Infrastructure;
 using Infrastructure.Authentication;
 using Infrastructure.Data;
@@ -17,7 +18,7 @@ namespace Presentation
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
 
-            builder.Services.AddInfrastructure(builder.Configuration);
+            builder.Services.AddInfrastructure(builder.Configuration).AddApplication();
           
   
             var app = builder.Build();
