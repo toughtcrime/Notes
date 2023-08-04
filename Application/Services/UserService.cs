@@ -14,33 +14,53 @@ using System.Linq;
 using System.Net;
 using System.Text;
 using System.Threading.Tasks;
+using Application.Requests;
+using System.Diagnostics;
+using System.Web.Http.ModelBinding;
+using Application.Response;
+
 namespace Application.Services
 {
     public class UserService : IUserService
     {
         private readonly MainDbContext _context;
         private readonly UserMapping _mapping;
-        public UserService(MainDbContext context, UserMapping mapping)
+        private readonly IJwtService _jwtService;
+        public UserService(MainDbContext context,
+                           UserMapping mapping,
+                           IJwtService jwtService)
         {
             _context = context;
             _mapping = mapping;
+            _jwtService = jwtService;
         }
 
-        public async Task<OneOf<User, HttpStatusCode>> GetUserById(long Id)
+        public async Task<OneOf<User, HttpStatusCode>> GetUserByIdAsync(long Id)
         {
             var user = await _context.Users.FirstOrDefaultAsync(x => x.Id == Id);
 
             return user is not null ? user : HttpStatusCode.NotFound;
         }
 
-        public async Task<OneOf<User,HttpStatusCode>> GetUserByUserName(string Username)
+        public async Task<bool> isUserExists(string UsernameOrEmail)
+        {
+            var byName = await _context.Users.FirstOrDefaultAsync(x => x.Username == UsernameOrEmail);
+            if (byName != null)
+            {
+                return true;
+            }
+            var byEmail = await _context.Users.FirstOrDefaultAsync(x => x.Email == UsernameOrEmail);
+            return byEmail != null ? true : false;
+        }
+
+        public async Task<OneOf<User,HttpStatusCode>> GetUserByUserNameAsync(string Username)
         {
             User? user = await _context.Users.FirstOrDefaultAsync(x => x.Username == Username);
 
             return user is not null ? user : HttpStatusCode.NotFound;
         }
 
-        public async Task<OneOf<User,HttpStatusCode>> Register(RegisterRequest request)
+        public async Task<OneOf<User,HttpStatusCode>> RegisterAsync(RegisterRequest request)
         {
 
             var user = _mapping.RegisterMap(request);
@@ -51,9 +71,25 @@ namespace Application.Services
             return user is not null ? user : HttpStatusCode.Created;
         }
 
-        public Task<OneOf<User, HttpStatusCode>> Login(RegisterRequest request)
+
+        public async Task<Response<string>> LoginAsync(LoginRequest request)
         {
-            throw new NotImplementedException();
+            var user = await GetUserByUserNameAsync(request.UsernameOrEmail);
+            var isPasswordMatching = _jwtService.VerifyPassword(request.Password, user.AsT0.HashedPassword);
+            if (user.AsT0 is not null && isPasswordMatching)
+            {
+                var jwtToken = _jwtService.GenerateJwtToken(user.AsT0);
+                return new Response<string>
+                {
+                    StatusCode = HttpStatusCode.Created,
+                    Data = jwtToken
+                };
+            }
+            return new Response<string>
+            {
+                StatusCode = HttpStatusCode.NotFound,
+                Data = "Wrong username or password"
+            };
         }
     }
 }

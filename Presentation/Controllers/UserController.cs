@@ -1,8 +1,11 @@
-﻿using Domain.Models;
+﻿using Application.Requests;
+using Application.Services;
+using Domain.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Presentation.Filters;
 using Presentation.Requests;
+using System.Net;
 
 namespace Presentation.Controllers
 {
@@ -10,20 +13,29 @@ namespace Presentation.Controllers
     [ApiController]
     public class UserController : ControllerBase
     {
-        
+        private readonly IUserService _userService;
+
+        public UserController(IUserService userService)
+        {
+            _userService = userService;
+        }
+
         [HttpPost("login")]
         [VerifyModelBidingActionFilter]
         public async Task<IActionResult> Login(LoginRequest request)
         {
-            return Ok();
+            var response = await _userService.LoginAsync(request);
+            
+            return response.StatusCode != HttpStatusCode.NotFound ?
+                Ok(response.Data) : NotFound(response.ErrorMessage);
         }
 
         [HttpPost("register")]
         [VerifyModelBidingActionFilter]
         public async Task<IActionResult> Register(RegisterRequest request)
         {
-                     
-            return Ok();
+            var result = await _userService.RegisterAsync(request);
+            return result.AsT1 == System.Net.HttpStatusCode.OK ? Ok() : BadRequest();
         }
     }
 }

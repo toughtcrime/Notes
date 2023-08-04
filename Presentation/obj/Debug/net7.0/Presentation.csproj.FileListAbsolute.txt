@@ -723,3 +723,7 @@ C:\Users\whatislove\Notes\Presentation\obj\Debug\net7.0\scopedcss\bundle\Present
 C:\Users\whatislove\Notes\Presentation\obj\Debug\net7.0\Presentation.csproj.CopyComplete
 C:\Users\whatislove\Notes\Presentation\obj\Debug\net7.0\Presentation.genruntimeconfig.cache
 C:\Users\whatislove\Notes\Presentation\obj\Debug\net7.0\ref\Presentation.dll
+C:\Users\whatislove\Notes\Presentation\bin\Debug\net7.0\System.Net.Http.Formatting.dll
+C:\Users\whatislove\Notes\Presentation\bin\Debug\net7.0\System.Web.Http.dll
+C:\Users\whatislove\Notes\Presentation\bin\Debug\net7.0\Newtonsoft.Json.Bson.dll
+C:\Users\whatislove\Notes\Presentation\obj\Debug\net7.0\Presentation.MvcApplicationPartsAssemblyInfo.cs

@@ -27,7 +27,7 @@ public class JwtService : IJwtService
     {
         var tokenHandler = new JwtSecurityTokenHandler();
         var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_options.SecretKey));
-        var signingCreds = new SigningCredentials(key, SecurityAlgorithms.EcdsaSha256Signature);
+        var signingCreds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
         var claims = new List<Claim>()
         {
             new Claim("Id", user.Id.ToString()),
