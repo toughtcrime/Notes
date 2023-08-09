@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace Application.DTO
 {
-    public class NoteDTO
+    public record NoteDTO
     {
-        public required string Title { get; set; }
-        public required string Content { get; set; }
+        public required string Title { get; init; }
+        public required string Content { get; init; }
     }
 }

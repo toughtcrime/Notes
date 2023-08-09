@@ -1,4 +1,5 @@
-﻿using Application.Mappings;
+﻿using Application.Interfaces;
+using Application.Mappings;
 using Application.Services;
 using Microsoft.Extensions.DependencyInjection;
 using System;
@@ -14,8 +15,9 @@ namespace Application
         public static IServiceCollection AddApplication(this IServiceCollection services)
         {
             services.AddTransient<UserMapping>();
+            services.AddTransient<NoteMapping>();
             services.AddTransient<IUserService, UserService>();
-
+            services.AddScoped<INoteService, NoteService>();
             return services;
         }
     }

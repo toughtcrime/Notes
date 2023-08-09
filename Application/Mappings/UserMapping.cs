@@ -1,4 +1,5 @@
 ﻿using Application.Requests;
+using Domain.Enums;
 using Domain.Models;
 using Microsoft.AspNetCore.Http.Features;
 using Presentation.Requests;
@@ -12,7 +13,7 @@ namespace Application.Mappings
 {
     public class UserMapping
     {
-        public User RegisterMap(RegisterRequest request) => new User
+        public User RegisterRequestToUser(RegisterRequest request) => new User
         {
             Email = request.Email,
             Firstname = request.Firstname,
@@ -20,7 +21,8 @@ namespace Application.Mappings
             BirthDay = request.BirthDay,
             HashedPassword = request.Password == request.RepeatPassword ?
                                BCrypt.Net.BCrypt.HashPassword(request.Password) : throw new Exception("Password is not matching"),
-            Username = request.Username
+            Username = request.Username,
+            Role = Roles.User
         };
     }
 }

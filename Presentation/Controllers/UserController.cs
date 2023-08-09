@@ -35,7 +35,7 @@ namespace Presentation.Controllers
         public async Task<IActionResult> Register(RegisterRequest request)
         {
             var result = await _userService.RegisterAsync(request);
-            return result.AsT1 == System.Net.HttpStatusCode.OK ? Ok() : BadRequest();
+            return result.AsT1 == HttpStatusCode.OK ? Ok() : BadRequest();
         }
     }
 }

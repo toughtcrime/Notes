@@ -17,7 +17,7 @@ using System.Threading.Tasks;
 using Application.Requests;
 using System.Diagnostics;
 using System.Web.Http.ModelBinding;
-using Application.Response;
+using Application.Responses;
 
 namespace Application.Services
 {
@@ -44,26 +44,31 @@ namespace Application.Services
 
         public async Task<bool> isUserExists(string UsernameOrEmail)
         {
-            var byName = await _context.Users.FirstOrDefaultAsync(x => x.Username == UsernameOrEmail);
+            var byName = await _context.Users.AsNoTracking().FirstOrDefaultAsync(x => x.Username == UsernameOrEmail);
             if (byName != null)
             {
                 return true;
             }
-            var byEmail = await _context.Users.FirstOrDefaultAsync(x => x.Email == UsernameOrEmail);
+            var byEmail = await _context.Users.AsNoTracking().FirstOrDefaultAsync(x => x.Email == UsernameOrEmail);
             return byEmail != null ? true : false;
         }
 
-        public async Task<OneOf<User,HttpStatusCode>> GetUserByUserNameAsync(string Username)
+        public async Task<OneOf<User,Response<Note>>> GetUserByUserNameAsync(string Username)
         {
-            User? user = await _context.Users.FirstOrDefaultAsync(x => x.Username == Username);
+            User? user = await _context.Users.Include(x => x.Notes)
+                                             .FirstOrDefaultAsync(x => x.Username == Username);
 
-            return user is not null ? user : HttpStatusCode.NotFound;
+            return user is not null ? user : new Response<Note>
+            {
+                StatusCode = HttpStatusCode.NotFound,
+                ErrorMessage = $"User with given username {Username} was not found"
+            };
         }
 
         public async Task<OneOf<User,HttpStatusCode>> RegisterAsync(RegisterRequest request)
         {
 
-            var user = _mapping.RegisterMap(request);
+            var user = _mapping.RegisterRequestToUser(request);
 
             _context.Users.Add(user);
             await _context.SaveChangesAsync();

@@ -14,6 +14,12 @@ public class UserConfiguration : IEntityTypeConfiguration<User>
         
         builder.HasMany(x => x.Notes)
                .WithOne(x => x.Owner)
-               .HasForeignKey(x => x.OwnerId);
+               .HasForeignKey(x => x.OwnerId)
+               .OnDelete(DeleteBehavior.NoAction);
+
+        builder.HasIndex(x => x.Username);
+        builder.HasIndex(x => x.Email);
+        builder.HasIndex(x => x.Id);
+
     }
 }
