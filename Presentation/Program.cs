@@ -2,6 +2,7 @@ using Application;
 using Infrastructure;
 using Infrastructure.Authentication;
 using Infrastructure.Data;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 
 namespace Presentation
@@ -17,7 +18,6 @@ namespace Presentation
             builder.Services.AddControllers();
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
-
             builder.Services.AddInfrastructure(builder.Configuration).AddApplication();
           
   

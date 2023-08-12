@@ -33,6 +33,7 @@ public class JwtService : IJwtService
             new Claim("Id", user.Id.ToString()),
             new Claim("Username", user.Username),
             new Claim("Password", user.HashedPassword),
+            new Claim("Role", user.Role.ToString())
         };
         var identity = new ClaimsIdentity(claims);
 

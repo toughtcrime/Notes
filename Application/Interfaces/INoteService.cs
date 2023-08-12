@@ -12,4 +12,5 @@ public interface INoteService
     Task<Response<Note>> DeleteNoteAsync(long Id);
     Task<Response<Note>> UpdateNoteAsync(long Id,NoteDTO dto);
     Task<Response<Note>> GetNoteAsync(long Id);
+    Task<Response<IReadOnlyCollection<NoteDTO>>> GetAllNotesAsync(long UserId);
 }

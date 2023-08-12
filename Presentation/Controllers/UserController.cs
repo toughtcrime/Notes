@@ -1,6 +1,7 @@
 ﻿using Application.Requests;
 using Application.Services;
 using Domain.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Presentation.Filters;
@@ -21,6 +22,7 @@ namespace Presentation.Controllers
         }
 
         [HttpPost("login")]
+        [AllowAnonymous]
         [VerifyModelBidingActionFilter]
         public async Task<IActionResult> Login(LoginRequest request)
         {
@@ -32,6 +34,7 @@ namespace Presentation.Controllers
 
         [HttpPost("register")]
         [VerifyModelBidingActionFilter]
+        [AllowAnonymous]
         public async Task<IActionResult> Register(RegisterRequest request)
         {
             var result = await _userService.RegisterAsync(request);

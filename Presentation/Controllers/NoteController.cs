@@ -2,9 +2,11 @@
 using Application.Interfaces;
 using Application.Services;
 using Domain.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using OneOf.Types;
+using Presentation.Filters;
 using System.Net;
 
 namespace Presentation.Controllers
@@ -21,13 +23,23 @@ namespace Presentation.Controllers
         }
 
 
+        [JwtAuthorize]
         [HttpGet("{Id:long}")]
         public async Task<IActionResult> GetNote(long Id)
         {
             var response = await _noteService.GetNoteAsync(Id);
-            return response.StatusCode == HttpStatusCode.OK ? Ok() : NotFound();
+            return response.StatusCode == HttpStatusCode.OK ? Ok(response.Data) : NotFound();
         }
 
+        [JwtAuthorize]
+        [HttpGet("notes/{UserId:long}")]
+        public async Task<IActionResult> GetAllNotes(long UserId)
+        {
+            var response = await _noteService.GetAllNotesAsync(UserId);
+            return response.StatusCode == HttpStatusCode.OK ? Ok(response.Data) : NotFound();
+        }
+
+        [JwtAuthorize]
         [HttpPost("create/{username}")]
         public async Task<IActionResult> Create(string username,NoteDTO note)
         {
@@ -36,8 +48,9 @@ namespace Presentation.Controllers
                 Created($"Create/{username}", note) : BadRequest(response.ErrorMessage);
         }
 
-        
+        [JwtAuthorize]
         [HttpDelete("delete/{Id:long}")]
+       
         //TODO: Implement jwt authorizing to authorize crud operations
         public async Task<IActionResult> Delete(long Id)
         {
@@ -46,6 +59,7 @@ namespace Presentation.Controllers
             return response.StatusCode == HttpStatusCode.NoContent ?
                            Ok() : Conflict(response.ErrorMessage);
         }
+        [JwtAuthorize]
         [HttpPut("update/{Id:long}")]
         public async Task<IActionResult> Update(long Id,NoteDTO dto)
         {

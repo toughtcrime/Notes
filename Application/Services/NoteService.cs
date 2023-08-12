@@ -119,4 +119,23 @@ public class NoteService : INoteService
         }
         return new Response<Note> { StatusCode = HttpStatusCode.OK, Data = note };
     }
+    public async Task<Response<IReadOnlyCollection<NoteDTO>>> GetAllNotesAsync(long UserId)
+    {
+        var noteDtos = _context.Notes.AsNoTracking()
+                                     .Where(x => x.OwnerId == UserId)
+                                     .Select(x => new NoteDTO { Title = x.Title, Content = x.Content })
+                                     .ToList()
+                                     .AsReadOnly();
+
+        if(noteDtos is null)
+        {
+            return new Response<IReadOnlyCollection<NoteDTO>>
+            {
+                StatusCode = HttpStatusCode.BadRequest,
+                ErrorMessage = $"User was not found"
+            };
+        }
+
+        return new Response<IReadOnlyCollection<NoteDTO>> { StatusCode = HttpStatusCode.OK, Data = noteDtos };
+    }
 }
