@@ -13,7 +13,7 @@ namespace Domain.Models
         public required DateTime BirthDay { get; set; }
         public DateTime RegistrationDate { get; set; } = DateTime.UtcNow;
         public List<Note>? Notes = new();
-        public Roles Role { get; set; }
+        public Roles Role { get; set; } = Roles.User;
 
     }
 }
