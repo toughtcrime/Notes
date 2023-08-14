@@ -1,0 +1,6 @@
+version: '3.8'
+services:
+  webapi:
+    image: toughtcrime/noteapp
+    ports:
+      - "5000:80"
