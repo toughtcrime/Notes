@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--
+https://go.microsoft.com/fwlink/?LinkID=208121.
+-->
+<Project>
+  <PropertyGroup>
+    <_PublishTargetUrl>C:\Users\whatislove\Notes\Presentation\bin\Release\net7.0\publish\</_PublishTargetUrl>
+    <History>True|2023-08-14T12:06:24.6724270Z;False|2023-08-14T14:05:29.7148422+02:00;True|2023-08-14T14:03:44.9070982+02:00;True|2023-08-14T13:11:41.0343432+02:00;</History>
+    <LastFailureDetails />
+    <TimeStampOfAssociatedLegacyPublishXmlFile />
+  </PropertyGroup>
+  <ItemGroup>
+    <DestinationConnectionStrings Include="MainConnection">
+      <Value>Host=ep-floral-truth-88935529.eu-central-1.aws.neon.tech%3bDatabase=ForSeed%3bUser Id=toughtcrime%3bPassword=rUMBqgC74zOe%3bPort=5432</Value>
+    </DestinationConnectionStrings>
+  </ItemGroup>
+</Project>
