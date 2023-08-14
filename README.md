@@ -8,6 +8,7 @@ Note is RESTful api built on asp.net core web api based on design pattern Clean 
 3. Open console and go to the location with downloaded file from previous step
 4. Paste in console next thing
 
+
         docker-compose up
 
 Docker will pull docker image from Docker Hub and it will run it on port 5000.
