@@ -1,7 +1,5 @@
-﻿################################################################################
-# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
-################################################################################
-
+﻿.gitignore
+.gitattributes
 /.vs/Notes/FileContentIndex
 **/bin/
 **/obj/
