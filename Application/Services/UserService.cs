@@ -79,16 +79,21 @@ namespace Application.Services
 
         public async Task<Response<string>> LoginAsync(LoginRequest request)
         {
-            var user = await GetUserByUserNameAsync(request.UsernameOrEmail);
-            var isPasswordMatching = _jwtService.VerifyPassword(request.Password, user.AsT0.HashedPassword);
-            if (user.AsT0 is not null && isPasswordMatching)
+            var userResponse = await GetUserByUserNameAsync(request.UsernameOrEmail);
+            string jwtToken = string.Empty;
+
+            if (userResponse.IsT0)
             {
-                var jwtToken = _jwtService.GenerateJwtToken(user.AsT0);
-                return new Response<string>
+                jwtToken = _jwtService.GenerateJwtToken(userResponse.AsT0);
+                var isPasswordMatching = _jwtService.VerifyPassword(request.Password, userResponse.AsT0.HashedPassword);
+                if(isPasswordMatching)
                 {
-                    StatusCode = HttpStatusCode.Created,
-                    Data = jwtToken
-                };
+                    return new Response<string>
+                    {
+                        StatusCode = HttpStatusCode.Created,
+                        Data = jwtToken
+                    };
+                }
             }
             return new Response<string>
             {

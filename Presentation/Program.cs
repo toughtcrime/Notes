@@ -5,6 +5,7 @@ using Infrastructure.Data;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
+using System.Security.Cryptography.Xml;
 
 namespace Presentation
 {
@@ -18,6 +19,10 @@ namespace Presentation
         
             builder.Services.AddControllers();
             builder.Services.AddEndpointsApiExplorer();
+            builder.Services.AddOutputCache(options => 
+            {
+                options.AddBasePolicy(x => x.With(xx => xx.HttpContext.Request.Query["nocache"] == "true").NoCache());
+            });
             builder.Services.AddSwaggerGen(c =>
             {
                 c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme()
@@ -45,7 +50,7 @@ namespace Presentation
           
   
             var app = builder.Build();
-
+            app.UseOutputCache();   
 
             if (app.Environment.IsDevelopment())
             {
