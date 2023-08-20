@@ -1,0 +1,27 @@
+
+header {
+    width: 100%;
+    background-color: #dddddd;
+}
+
+.wrapper {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    height: 52px;
+    align-items: center;
+}
+
+
+.header-link {
+    text-decoration: none;
+    margin-right: 10px;
+    color: #000;
+}
+
+.header-title {
+    font-size: 20px;
+    font-weight: 200;
+    margin-left: 20px;
+}
+

@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "NuRYlQuxLOWvKlZt7j3kwbJdPDQ/AzzvGip5YsSDfM3hSSfIzk4MpKKoFNofCb9necC77dunQIoYG9UExdCctg==",
+  "dgSpecHash": "ChmEhD2cuB6gxjksBzNjcPOHGcUrF6bzmX5eE+wg6eMnv/iYRAUkku1iFyYa+Jz0oOaO7jkewaJI/8rF/xWqKA==",
   "success": true,
-  "projectFilePath": "C:\\Users\\whatislove\\Notes\\Presentation\\Presentation.csproj",
+  "projectFilePath": "C:\\Users\\whatislove\\Notes\\src\\backend\\Presentation\\Presentation.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\whatislove\\.nuget\\packages\\bcrypt.net-next\\4.0.3\\bcrypt.net-next.4.0.3.nupkg.sha512",
     "C:\\Users\\whatislove\\.nuget\\packages\\humanizer\\2.14.1\\humanizer.2.14.1.nupkg.sha512",
