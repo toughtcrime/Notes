@@ -1,0 +1,35 @@
+.signIn-form label, .signIn-form input, .signInButton {
+    display: block;
+    width: 100%;
+}
+
+.signInButton {
+    border: 0;
+    background-color: #000;
+    color: #fff;
+    height: 45px;
+    font-size: 20px;
+    cursor: pointer;
+    border-radius: 3px;
+    margin-top: 15px;
+}
+
+
+.signIn-form {
+    width: 300px;   
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+}
+
+
+
+.form-control {
+    height: 30px;
+    font-size: 15px;
+}
+
+.form-group {
+    margin-top: 15px;
+}

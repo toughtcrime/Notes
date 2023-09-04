@@ -1,1 +1,31 @@
-<p>register works!</p>
+<div class="register-form">
+    <form [formGroup]="RegisterGroup" (submit)="onSubmit(RegisterGroup)">
+        <div class="form-group">
+            <label for="username">Username</label>
+            <input id="username" type="text" class="form-control" formControlName="username"/>
+            <div class="error" *ngIf="RegisterGroup.get('username')?.hasError('required')">Username is required</div>
+            <div class="error" *ngIf="RegisterGroup.get('username')?.hasError('minlength')">Password must be at least 5 characters long</div>
+        </div>
+    
+        <div class="form-group">
+            <label for="email">Email</label>
+            <input id="email" type="text" class="form-control" formControlName="email"/>
+            <div class="error" *ngIf="RegisterGroup.get('email')?.hasError('required')">Email is required</div>
+            <div class="error" *ngIf="RegisterGroup.get('email')?.hasError('email')">Invalid email</div>
+        </div>
+        <div class="form-group">
+            <label for="password">Password</label>
+            <input id="password" type="password" class="form-control" formControlName="password"/>
+            <div *ngIf="RegisterGroup.get('password')?.hasError('required')">Password is required</div>
+            <div *ngIf="RegisterGroup.get('password')?.hasError('minlength')">Password must be at least 6 characters long</div>
+        </div>
+    
+        <div class="form-group">
+            <label for="repeatPassword">Repeat Password</label>
+            <input id="repeatPassword" type="password" class="form-control" formControlName="repeatPassword"/>
+            <div *ngIf="RegisterGroup.errors?.['PasswordNoMatch']">Passwords do not match</div>
+        </div>
+    
+        <button type="submit" class="register-button" [disabled]="RegisterGroup.invalid">Register</button>
+    </form>
+</div>
