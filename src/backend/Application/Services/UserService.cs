@@ -82,18 +82,15 @@ namespace Application.Services
             var userResponse = await GetUserByUserNameAsync(request.UsernameOrEmail);
             string jwtToken = string.Empty;
 
-            if (userResponse.IsT0)
+            if (userResponse.IsT0 && BCrypt.Net.BCrypt.Verify(request.Password,userResponse.AsT0.HashedPassword))
             {
                 jwtToken = _jwtService.GenerateJwtToken(userResponse.AsT0);
-                var isPasswordMatching = _jwtService.VerifyPassword(request.Password, userResponse.AsT0.HashedPassword);
-                if(isPasswordMatching)
-                {
+
                     return new Response<string>
                     {
                         StatusCode = HttpStatusCode.Created,
                         Data = jwtToken
                     };
-                }
             }
             return new Response<string>
             {

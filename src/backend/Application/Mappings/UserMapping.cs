@@ -16,9 +16,6 @@ namespace Application.Mappings
         public User RegisterRequestToUser(RegisterRequest request) => new User
         {
             Email = request.Email,
-            Firstname = request.Firstname,
-            Lastname = request.Lastname,
-            BirthDay = request.BirthDay,
             HashedPassword = request.Password == request.RepeatPassword ?
                                BCrypt.Net.BCrypt.HashPassword(request.Password) : throw new Exception("Password is not matching"),
             Username = request.Username,
