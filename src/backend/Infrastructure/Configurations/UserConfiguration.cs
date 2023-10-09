@@ -27,9 +27,6 @@ public class UserConfiguration : IEntityTypeConfiguration<User>
             Id = 1,
             Username = "JackBiba",
             Email = "text@mail.com",
-            Firstname = "Jack",
-            Lastname = "BIba",
-            BirthDay = new DateTime(2000, 10, 17),
             HashedPassword = BCrypt.Net.BCrypt.HashPassword("test12312312312")
         });
 
@@ -38,9 +35,6 @@ public class UserConfiguration : IEntityTypeConfiguration<User>
             Id = 2,
             Username = "JackBoba",
             Email = "text@mail.com",
-            Firstname = "Jack",
-            Lastname = "Boba",
-            BirthDay = new DateTime(2000, 10, 17),
             HashedPassword = BCrypt.Net.BCrypt.HashPassword("bobaORbiba?")
         });
     }

@@ -13,6 +13,7 @@ namespace Presentation.Filters
     public class JwtAuthorize : Attribute, IAuthorizationFilter
     {
         public const string _jwtHeader = "Authorization";
+        public const string AdminRole = "Administrator";
         public JwtSecurityToken DecodeJwt(AuthorizationFilterContext context)
         {
             string jwtToken = context.HttpContext.Request.Headers[_jwtHeader];
@@ -34,7 +35,7 @@ namespace Presentation.Filters
 
         public bool isAdmin(string jwtRole)
         {
-            return jwtRole == "Administrator";
+            return jwtRole == AdminRole;
         }
 
         public void OnAuthorization(AuthorizationFilterContext context)

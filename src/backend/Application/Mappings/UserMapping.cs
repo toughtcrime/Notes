@@ -1,5 +1,6 @@
 ﻿using Application.Requests;
 using Domain.Enums;
+using Domain.Exceptions;
 using Domain.Models;
 using Microsoft.AspNetCore.Http.Features;
 using Presentation.Requests;
@@ -16,11 +17,8 @@ namespace Application.Mappings
         public User RegisterRequestToUser(RegisterRequest request) => new User
         {
             Email = request.Email,
-            Firstname = request.Firstname,
-            Lastname = request.Lastname,
-            BirthDay = request.BirthDay,
             HashedPassword = request.Password == request.RepeatPassword ?
-                               BCrypt.Net.BCrypt.HashPassword(request.Password) : throw new Exception("Password is not matching"),
+                               BCrypt.Net.BCrypt.HashPassword(request.Password) : throw new PasswordNotMatchingException(),
             Username = request.Username,
             Role = Roles.User
         };

@@ -9,7 +9,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Infrastructure.Migrations
 {
     /// <inheritdoc />
-    public partial class seed_init : Migration
+    public partial class InitV2 : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -23,9 +23,6 @@ namespace Infrastructure.Migrations
                     Username = table.Column<string>(type: "text", nullable: false),
                     Email = table.Column<string>(type: "text", nullable: false),
                     HashedPassword = table.Column<string>(type: "text", nullable: false),
-                    Firstname = table.Column<string>(type: "text", nullable: false),
-                    Lastname = table.Column<string>(type: "text", nullable: false),
-                    BirthDay = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
                     RegistrationDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
                     Role = table.Column<int>(type: "integer", nullable: false)
                 },
@@ -56,11 +53,11 @@ namespace Infrastructure.Migrations
 
             migrationBuilder.InsertData(
                 table: "Users",
-                columns: new[] { "Id", "BirthDay", "Email", "Firstname", "HashedPassword", "Lastname", "RegistrationDate", "Role", "Username" },
+                columns: new[] { "Id", "Email", "HashedPassword", "RegistrationDate", "Role", "Username" },
                 values: new object[,]
                 {
-                    { 1L, new DateTime(2000, 10, 17, 0, 0, 0, 0, DateTimeKind.Utc), "text@mail.com", "Jack", "$2a$11$pWyoa2Oavffzf312ja0/7.nGY1PjGLtjPOzUrdKxiaZ1Pqv1teUEG", "BIba", new DateTime(2023, 8, 12, 13, 11, 24, 383, DateTimeKind.Utc).AddTicks(1872), 0, "JackBiba" },
-                    { 2L, new DateTime(2000, 10, 17, 0, 0, 0, 0, DateTimeKind.Utc), "text@mail.com", "Jack", "$2a$11$0K9VUmVAXpn0rMJBaYDaq.ZSPC5k0srx8JzdMDl/efBiEjyl8Ur6e", "Boba", new DateTime(2023, 8, 12, 13, 11, 24, 631, DateTimeKind.Utc).AddTicks(7937), 0, "JackBoba" }
+                    { 1L, "text@mail.com", "$2a$11$YxtxFEyBexyoHcMZ4zEsgeAIAO53TcDDyYDoMrxRVXLnsdOMgt/HS", new DateTime(2023, 10, 9, 6, 41, 38, 259, DateTimeKind.Utc).AddTicks(5417), 1, "JackBiba" },
+                    { 2L, "text@mail.com", "$2a$11$KPE6U7BhXGasiL2dP57vceFQO3t/kWj1wPpKveIG8.UNbVAu8o1Qa", new DateTime(2023, 10, 9, 6, 41, 38, 512, DateTimeKind.Utc).AddTicks(1385), 1, "JackBoba" }
                 });
 
             migrationBuilder.InsertData(

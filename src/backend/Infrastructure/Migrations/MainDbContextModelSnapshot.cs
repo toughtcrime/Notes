@@ -92,22 +92,11 @@ namespace Infrastructure.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("Id"));
 
-                    b.Property<DateTime>("BirthDay")
-                        .HasColumnType("timestamp with time zone");
-
                     b.Property<string>("Email")
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<string>("Firstname")
-                        .IsRequired()
-                        .HasColumnType("text");
-
                     b.Property<string>("HashedPassword")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<string>("Lastname")
                         .IsRequired()
                         .HasColumnType("text");
 
@@ -135,25 +124,19 @@ namespace Infrastructure.Migrations
                         new
                         {
                             Id = 1L,
-                            BirthDay = new DateTime(2000, 10, 17, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "text@mail.com",
-                            Firstname = "Jack",
-                            HashedPassword = "$2a$11$pWyoa2Oavffzf312ja0/7.nGY1PjGLtjPOzUrdKxiaZ1Pqv1teUEG",
-                            Lastname = "BIba",
-                            RegistrationDate = new DateTime(2023, 8, 12, 13, 11, 24, 383, DateTimeKind.Utc).AddTicks(1872),
-                            Role = 0,
+                            HashedPassword = "$2a$11$YxtxFEyBexyoHcMZ4zEsgeAIAO53TcDDyYDoMrxRVXLnsdOMgt/HS",
+                            RegistrationDate = new DateTime(2023, 10, 9, 6, 41, 38, 259, DateTimeKind.Utc).AddTicks(5417),
+                            Role = 1,
                             Username = "JackBiba"
                         },
                         new
                         {
                             Id = 2L,
-                            BirthDay = new DateTime(2000, 10, 17, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "text@mail.com",
-                            Firstname = "Jack",
-                            HashedPassword = "$2a$11$0K9VUmVAXpn0rMJBaYDaq.ZSPC5k0srx8JzdMDl/efBiEjyl8Ur6e",
-                            Lastname = "Boba",
-                            RegistrationDate = new DateTime(2023, 8, 12, 13, 11, 24, 631, DateTimeKind.Utc).AddTicks(7937),
-                            Role = 0,
+                            HashedPassword = "$2a$11$KPE6U7BhXGasiL2dP57vceFQO3t/kWj1wPpKveIG8.UNbVAu8o1Qa",
+                            RegistrationDate = new DateTime(2023, 10, 9, 6, 41, 38, 512, DateTimeKind.Utc).AddTicks(1385),
+                            Role = 1,
                             Username = "JackBoba"
                         });
                 });
